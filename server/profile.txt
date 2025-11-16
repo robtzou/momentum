@@ -1,0 +1,50 @@
+======================================================================
+ STUDENT WELLNESS & HABITS PROFILE
+======================================================================
+This report summarizes the student's self-reported daily habits,
+commitments, and preferences to inform support strategies.
+
+--- 1. Logistics & Commitments ---
+* Living Situation: On-Campus Resident
+* Home Base / Parking: South campus
+
+* Fixed Commitments:
+  - classes (ESJ) on MWF from 2:00pm to 6:00pm
+  - classes (Hornebake) on TTh from 3:00pm to 6:00pm
+  - work (Online) on Friday from 10:00am to 1:00pm
+
+  > Advisor Note: Review the density of this schedule.
+    Check for 'buffer time' between classes and locations.
+
+--- 2. Daily Rhythm & Energy ---
+* Ideal Sleep Schedule: Wake up at 8:00am and go to sleep at 12:00pm
+* Preferred 'Workday': 11:00am to 10:00pm
+* Peak Focus Time: Afternoon
+
+  > Advisor Note: Compare ideal sleep with actual commitments.
+    A 'Afternoon' preference may conflict with
+    an early class schedule, creating a friction point.
+
+--- 3. Study & Work Preferences ---
+* Preferred Study Style: Standard Sessions (e.g., 50 min work, 10 min break)
+* Task Management: Warm-Up (Schedule 1-2 easy tasks first)
+* Weekly Study Goal: 12 hours
+* Favorite Study Spots: ESJ Basement, Hornebake Basement, 7th Floor McKeldin
+
+  > Advisor Note: The goal of 12 hours/week
+    is a key self-reported pressure point. The student's task
+    approach ('Warm-Up (Schedule 1-2 easy tasks first)') is a good indicator
+    of their coping mechanism for difficult work.
+
+--- 4. Personal Habits & Well-being ---
+* Meal Habits: I go to the dining hall
+* Exercise Frequency: 3
+* Exercise Duration: 60
+* Scheduled Downtime: Yes
+
+  > Advisor Note: The student's meal, exercise, and downtime
+    habits are foundational to well-being. Their stated
+    downtime preference is a good starting point for
+    building a sustainable work-life balance.
+
+======================================================================

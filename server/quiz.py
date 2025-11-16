@@ -40,104 +40,136 @@ def get_list_items(prompt, item_name):
         items.append(item)
     return items
 
-def get_fixed_commitments():
-    """
-    Collects a list of fixed commitments (event, time, location).
-    """
-    print("\nNext, let's add your fixed commitments (classes, work, etc.).")
-    commitments = []
-    while True:
-        name = get_input("Enter event name (or type 'done' to finish):")
-        if name.lower() == 'done':
-            break
-        
-        days = get_input(f"  Days for {name} (e.g., MWF, TTh):")
-        start_time = get_input(f"  Start time for {name}:")
-        end_time = get_input(f"  End time for {name}:")
-        location = get_input(f"  Location for {name}:")
-        
-        # Format as a nice string for the summary
-        commitment_str = f"{name} ({location}) on {days} from {start_time} to {end_time}"
-        commitments.append(commitment_str)
-    return commitments
+import textwrap # Make sure textwrap is still imported at the top of your file
 
 def print_summary(responses):
     """
-    Prints a structured report for an advisor to review.
+    Builds a structured report, saves it to 'profile.txt', 
+    and prints it to the console.
     """
-    print("\n" + "="*70)
-    print(" STUDENT WELLNESS & HABITS PROFILE")
-    print("="*70)
-    print("This report summarizes the student's self-reported daily habits,")
-    print("commitments, and preferences to inform support strategies.\n")
+    
+    # Use a list to build the report parts efficiently
+    report_lines = []
+
+    # --- Build Header ---
+    report_lines.append("="*70)
+    report_lines.append(" STUDENT WELLNESS & HABITS PROFILE")
+    report_lines.append("="*70)
+    report_lines.append("This report summarizes the student's self-reported daily habits,")
+    report_lines.append("commitments, and preferences to inform support strategies.\n")
 
     # --- Section 1: Logistics & Commitments ---
-    print("--- 1. Logistics & Commitments ---")
-    print(f"* Living Situation: {responses['living_situation']}")
-    print(f"* Home Base / Parking: {responses['home_base']}")
+    report_lines.append("--- 1. Logistics & Commitments ---")
+    report_lines.append(f"* Living Situation: {responses['living_situation']}")
+    report_lines.append(f"* Home Base / Parking: {responses['home_base']}")
     
     if 'commute_time' in responses:
-        print(f"* Average Commute: {responses['commute_time']} (one-way)")
-        print(f"  > Advisor Note: Student has a significant daily commute,")
-        print(f"    which impacts available time and adds potential stress.")
+        report_lines.append(f"* Average Commute: {responses['commute_time']} (one-way)")
+        report_lines.append(f"  > Advisor Note: Student has a significant daily commute,")
+        report_lines.append(f"    which impacts available time and adds potential stress.")
     
-    print("\n* Fixed Commitments:")
+    report_lines.append("\n* Fixed Commitments:")
     if responses['commitments']:
         for item in responses['commitments']:
-            print(f"  - {item}")
-        print(f"\n  > Advisor Note: Review the density of this schedule.")
-        print(f"    Check for 'buffer time' between classes and locations.")
+            report_lines.append(f"  - {item}")
+        report_lines.append(f"\n  > Advisor Note: Review the density of this schedule.")
+        report_lines.append(f"    Check for 'buffer time' between classes and locations.")
     else:
-        print("  - No fixed commitments reported.")
+        report_lines.append("  - No fixed commitments reported.")
 
     # --- Section 2: Daily Rhythm & Energy ---
-    print("\n--- 2. Daily Rhythm & Energy ---")
-    print(f"* Ideal Sleep Schedule: {responses['wake_time']} to {responses['bed_time']}")
-    print(f"* Preferred 'Workday': {responses['workday_start']} to {responses['workday_end']}")
-    print(f"* Peak Focus Time: {responses['focus_time']}")
-    print(f"\n  > Advisor Note: Compare ideal sleep with actual commitments.")
-    print(f"    A '{responses['focus_time']}' preference may conflict with")
-    print(f"    an early class schedule, creating a friction point.")
+    report_lines.append("\n--- 2. Daily Rhythm & Energy ---")
+    report_lines.append(f"* Ideal Sleep Schedule: {responses['wake_time']} to {responses['bed_time']}")
+    report_lines.append(f"* Preferred 'Workday': {responses['workday_start']} to {responses['workday_end']}")
+    report_lines.append(f"* Peak Focus Time: {responses['focus_time']}")
+    report_lines.append(f"\n  > Advisor Note: Compare ideal sleep with actual commitments.")
+    report_lines.append(f"    A '{responses['focus_time']}' preference may conflict with")
+    report_lines.append(f"    an early class schedule, creating a friction point.")
 
     # --- Section 3: Study & Work Preferences ---
-    print("\n--- 3. Study & Work Preferences ---")
-    print(f"* Preferred Study Style: {responses['study_style']}")
-    print(f"* Task Management: {responses['task_approach']}")
-    print(f"* Weekly Study Goal: {responses['study_hours_goal']} hours")
+    report_lines.append("\n--- 3. Study & Work Preferences ---")
+    report_lines.append(f"* Preferred Study Style: {responses['study_style']}")
+    report_lines.append(f"* Task Management: {responses['task_approach']}")
+    report_lines.append(f"* Weekly Study Goal: {responses['study_hours_goal']} hours")
     
     spots = ", ".join(responses['study_spots']) if responses['study_spots'] else "None reported"
-    print(f"* Favorite Study Spots: {spots}")
+    report_lines.append(f"* Favorite Study Spots: {spots}")
     
-    print(f"\n  > Advisor Note: The goal of {responses['study_hours_goal']} hours/week")
-    print(f"    is a key self-reported pressure point. The student's task")
-    print(f"    approach ('{responses['task_approach']}') is a good indicator")
-    print(f"    of their coping mechanism for difficult work.")
+    report_lines.append(f"\n  > Advisor Note: The goal of {responses['study_hours_goal']} hours/week")
+    report_lines.append(f"    is a key self-reported pressure point. The student's task")
+    report_lines.append(f"    approach ('{responses['task_approach']}') is a good indicator")
+    report_lines.append(f"    of their coping mechanism for difficult work.")
 
     # --- Section 4: Personal Habits & Well-being ---
-    print("\n--- 4. Personal Habits & Well-being ---")
-    print(f"* Meal Habits: {responses['meals']}")
-    print(f"* Exercise Frequency: {responses['exercise_freq']}")
-    print(f"* Exercise Duration: {responses['exercise_duration']}")
-    print(f"* Scheduled Downtime: {responses['downtime']}")
+    report_lines.append("\n--- 4. Personal Habits & Well-being ---")
+    report_lines.append(f"* Meal Habits: {responses['meals']}")
+    report_lines.append(f"* Exercise Frequency: {responses['exercise_freq']}")
+    report_lines.append(f"* Exercise Duration: {responses['exercise_duration']}")
+    report_lines.append(f"* Scheduled Downtime: {responses['downtime']}")
 
     # --- Final Advisor Note (CRITICAL) ---
     if ('no' in responses['downtime'].lower() or 
         'fill' in responses['downtime'].lower() or 
         'just fill' in responses['downtime'].lower()):
         
-        print(f"\n  *** KEY ADVISOR NOTE: BURNOUT RISK ***")
-        print(f"  Student reported NOT scheduling dedicated downtime")
-        print(f"  (Response: '{responses['downtime']}').")
-        print(f"  This is a primary risk factor for burnout and a key")
-        print(f"  area for intervention and discussion.")
+        report_lines.append(f"\n  *** KEY ADVISOR NOTE: BURNOUT RISK ***")
+        report_lines.append(f"  Student reported NOT scheduling dedicated downtime")
+        report_lines.append(f"  (Response: '{responses['downtime']}').")
+        report_lines.append(f"  This is a primary risk factor for burnout and a key")
+        report_lines.append(f"  area for intervention and discussion.")
     else:
-        print(f"\n  > Advisor Note: The student's meal, exercise, and downtime")
-        print(f"    habits are foundational to well-being. Their stated")
-        print(f"    downtime preference is a good starting point for")
-        print(f"    building a sustainable work-life balance.")
+        report_lines.append(f"\n  > Advisor Note: The student's meal, exercise, and downtime")
+        report_lines.append(f"    habits are foundational to well-being. Their stated")
+        report_lines.append(f"    downtime preference is a good starting point for")
+        report_lines.append(f"    building a sustainable work-life balance.")
 
-    print("\n" + "="*70)
+    report_lines.append("\n" + "="*70)
 
+    # --- Finalize the Report String ---
+    # Join all the lines together with newline characters
+    final_report = "\n".join(report_lines)
+
+    # --- Save to File and Print to Console ---
+    try:
+        # Write the final report string to 'profile.txt'
+        with open('profile.txt', 'w', encoding='utf-8') as f:
+            f.write(final_report)
+        
+        # Also print the report to the console for immediate feedback
+        print(final_report)
+        
+        # Add a success message
+        print("\n... This profile has been successfully saved to 'profile.txt'.")
+
+    except IOError as e:
+        # Handle errors (e.g., folder is read-only)
+        print(f"\n--- ERROR ---")
+        print(f"Could not save profile to 'profile.txt'. Error: {e}")
+        print("Here is your profile output instead:\n")
+        print(final_report)
+
+    # --- Finalize the Report String ---
+    # Join all the lines together with newline characters
+    final_report = "\n".join(report_lines)
+
+    # --- Save to File and Print to Console ---
+    try:
+        # Write the final report string to 'profile.txt'
+        with open('profile.txt', 'w', encoding='utf-8') as f:
+            f.write(final_report)
+        
+        # Also print the report to the console for immediate feedback
+        print(final_report)
+        
+        # Add a success message
+        print("\n... This profile has been successfully saved to 'profile.txt'.")
+
+    except IOError as e:
+        # Handle errors (e.g., folder is read-only)
+        print(f"\n--- ERROR ---")
+        print(f"Could not save profile to 'profile.txt'. Error: {e}")
+        print("Here is your profile output instead:\n")
+        print(final_report)
 
 def main():
     """

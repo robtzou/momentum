@@ -1,5 +1,3 @@
-""" Quiz Prompts: """
-
 import textwrap
 
 def get_input(prompt):
@@ -40,6 +38,27 @@ def get_list_items(prompt, item_name):
         items.append(item)
     return items
 
+def get_fixed_commitments():
+    """
+    Collects a list of fixed commitments (event, time, location).
+    """
+    print("\nNext, let's add your fixed commitments (classes, work, etc.).")
+    commitments = []
+    while True:
+        name = get_input("Enter event name (or type 'done' to finish):")
+        if name.lower() == 'done':
+            break
+        
+        days = get_input(f"  Days for {name} (e.g., MWF, TTh):")
+        start_time = get_input(f"  Start time for {name}:")
+        end_time = get_input(f"  End time for {name}:")
+        location = get_input(f"  Location for {name}:")
+        
+        # Format as a nice string for the summary
+        commitment_str = f"{name} ({location}) on {days} from {start_time} to {end_time}"
+        commitments.append(commitment_str)
+    return commitments
+
 import textwrap # Make sure textwrap is still imported at the top of your file
 
 def print_summary(responses):
@@ -65,21 +84,17 @@ def print_summary(responses):
     
     if 'commute_time' in responses:
         report_lines.append(f"* Average Commute: {responses['commute_time']} (one-way)")
-        report_lines.append(f"  > Advisor Note: Student has a significant daily commute,")
-        report_lines.append(f"    which impacts available time and adds potential stress.")
     
     report_lines.append("\n* Fixed Commitments:")
     if responses['commitments']:
         for item in responses['commitments']:
             report_lines.append(f"  - {item}")
-        report_lines.append(f"\n  > Advisor Note: Review the density of this schedule.")
-        report_lines.append(f"    Check for 'buffer time' between classes and locations.")
     else:
         report_lines.append("  - No fixed commitments reported.")
 
     # --- Section 2: Daily Rhythm & Energy ---
     report_lines.append("\n--- 2. Daily Rhythm & Energy ---")
-    report_lines.append(f"* Ideal Sleep Schedule: {responses['wake_time']} to {responses['bed_time']}")
+    report_lines.append(f"* Ideal Sleep Schedule: Wake up at {responses['wake_time']} and go to sleep at {responses['bed_time']}")
     report_lines.append(f"* Preferred 'Workday': {responses['workday_start']} to {responses['workday_end']}")
     report_lines.append(f"* Peak Focus Time: {responses['focus_time']}")
     report_lines.append(f"\n  > Advisor Note: Compare ideal sleep with actual commitments.")
@@ -148,28 +163,6 @@ def print_summary(responses):
         print("Here is your profile output instead:\n")
         print(final_report)
 
-    # --- Finalize the Report String ---
-    # Join all the lines together with newline characters
-    final_report = "\n".join(report_lines)
-
-    # --- Save to File and Print to Console ---
-    try:
-        # Write the final report string to 'profile.txt'
-        with open('profile.txt', 'w', encoding='utf-8') as f:
-            f.write(final_report)
-        
-        # Also print the report to the console for immediate feedback
-        print(final_report)
-        
-        # Add a success message
-        print("\n... This profile has been successfully saved to 'profile.txt'.")
-
-    except IOError as e:
-        # Handle errors (e.g., folder is read-only)
-        print(f"\n--- ERROR ---")
-        print(f"Could not save profile to 'profile.txt'. Error: {e}")
-        print("Here is your profile output instead:\n")
-        print(final_report)
 
 def main():
     """

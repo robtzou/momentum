@@ -1,0 +1,308 @@
+.hero {
+    align-items: flex-start;
+  }
+  .hero-copy {
+    padding-top: 0;
+    margin-top: 0;
+  }
+  .quiz-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;   /* center horizontally */
+    align-items: center;       /* center vertically */
+    min-height: 100vh;         /* this forces vertical centering */
+  }
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;        /* shifts full layout upward */
+    padding: 40px 5vw 60px;
+  }
+  
+  .hero-inner {
+    max-width: 1180px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;        /* top-align both columns */
+    justify-content: space-between;
+    gap: 60px;
+  }
+  
+  .hero-copy {
+    flex: 1.1;
+    margin-top: 0;                 /* NEW — removes space */
+    padding-top: 0;                /* NEW — pushes text to very top */
+  }
+  
+  .quiz-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;       /* center horizontally */
+    align-items: center;           /* center vertically */
+    min-height: 100vh;             /* NEW — forces full height centering */
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    background: linear-gradient(135deg, #c7e0ea 0%, #e6f4fa 45%, #ffffff 100%);
+    color: #12212f;
+  }
+
+  /* HERO LAYOUT (reused) ------------------------------------------- */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 5vw 60px;
+  }
+
+  .hero-inner {
+    max-width: 1180px;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .hero-copy {
+    flex: 1.1;
+  }
+
+  .hero-kicker {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #4e9afc;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  .hero-copy h1 {
+    font-size: 38px;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .hero-copy p {
+    font-size: 16px;
+    max-width: 470px;
+    color: #4b5b6b;
+    margin-bottom: 18px;
+  }
+
+  .hero-footnote {
+    font-size: 12px;
+    color: #7a8896;
+    margin-top: 10px;
+  }
+
+  .badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .badge {
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(79, 154, 252, 0.08);
+    color: #347ad8;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .badge-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #4e9afc;
+  }
+
+  /* BUTTONS -------------------------------------------------------- */
+  .btn {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 14px;
+    padding: 11px 22px;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary {
+    background: #2f80ff;
+    color: #ffffff;
+    box-shadow: 0 10px 20px rgba(47, 128, 255, 0.3);
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 12px 24px rgba(47, 128, 255, 0.35);
+  }
+
+  .btn-ghost {
+    background: rgba(255, 255, 255, 0.85);
+    color: #2f80ff;
+    border: 1px solid rgba(79, 154, 252, 0.3);
+  }
+  .btn-ghost:hover {
+    background: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  /* QUIZ CARD ------------------------------------------------------ */
+  .quiz-wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;        /* horizontally center the quiz card */
+    align-items: center;            /* vertically center the quiz card in its column */
+  }
+
+  .quiz-card {
+    width: 100%;
+    max-width: 520px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 24px;
+    padding: 24px 26px 26px;
+    box-shadow:
+      0 24px 50px rgba(9, 55, 120, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.7);
+  }
+
+  .quiz-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .quiz-subtitle {
+    font-size: 13px;
+    color: #6c7a8a;
+    margin-bottom: 16px;
+  }
+
+  .quiz-note {
+    font-size: 12px;
+    color: #2f80ff;
+    background: rgba(47, 128, 255, 0.08);
+    border-radius: 12px;
+    padding: 8px 10px;
+    margin-bottom: 16px;
+  }
+
+  .quiz-question {
+    margin-bottom: 18px;
+  }
+
+  .quiz-question label.quiz-label,
+  .quiz-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 6px;
+  }
+
+  .quiz-helper {
+    font-size: 11px;
+    color: #7a8896;
+    margin-bottom: 4px;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .quiz-option {
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    background: rgba(240, 247, 255, 0.9);
+  }
+
+  .quiz-option input {
+    accent-color: #2f80ff;
+  }
+
+  .quiz-input,
+  .quiz-select,
+  .quiz-textarea {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #c6d3e0;
+    padding: 8px 10px;
+    font-size: 13px;
+    font-family: inherit;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  .quiz-textarea {
+    min-height: 70px;
+    resize: vertical;
+  }
+
+  .quiz-row-inline {
+    display: flex;
+    gap: 10px;
+  }
+  .quiz-row-inline > div {
+    flex: 1;
+  }
+
+  .quiz-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .quiz-footer small {
+    font-size: 11px;
+    color: #7a8896;
+  }
+
+  /* RESPONSIVE ----------------------------------------------------- */
+  @media (max-width: 900px) {
+    .hero-inner {
+      flex-direction: column;
+      gap: 30px;
+    }
+    .hero-copy {
+      text-align: center;
+    }
+    .hero-copy p,
+    .hero-footnote,
+    .badge-row {
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+    }
+    .quiz-wrapper {
+      width: 100%;
+      align-items: stretch;         /* so the card sits under the text on mobile */
+    }
+  }
+
+
+  
